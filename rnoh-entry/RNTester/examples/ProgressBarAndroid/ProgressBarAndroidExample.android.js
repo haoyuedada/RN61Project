@@ -59,7 +59,7 @@ class MovingBar extends React.Component<MovingBarProps, MovingBarState> {
 class ProgressBarAndroidExample extends React.Component<{}> {
   render() {
     return (
-      <RNTesterPage title="ProgressBar Examples">
+      <RNTesterPage title="ProgressBar Examples3">
         <RNTesterBlock title="Horizontal Indeterminate ProgressBar">
           {/* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was
            * found when making Flow check .android.js files. */}

@@ -183,4 +183,160 @@ exports.examples = [
       );
     },
   },
+  {
+    title: 'Date picker with min/max date limits',
+    render: function (): React.Element<any> {
+      return (
+        <WithDatePickerData useLocaleDateFunctions={false}>
+          {(state, onDateChange) => {
+            // 设置最小日期为当前日期
+            const minDate = new Date();
+            // 设置最大日期为当前日期后30天
+            const maxDate = new Date();
+            maxDate.setDate(maxDate.getDate() + 30);
+
+            return (
+              <View>
+                {/* <WithLabel label="Select date (limited to next 30 days):"> */}
+                  <DatePickerIOS
+                    testID="date-with-limits"
+                    date={state.date}
+                    mode="date"
+                    minimumDate={minDate}
+                    maximumDate={maxDate}
+                    onDateChange={onDateChange}
+                  />
+                {/* </WithLabel> */}
+                <Text style={styles.label}>
+                  Min date: {minDate.toDateString()}
+                </Text>
+                <Text style={styles.label}>
+                  Max date: {maxDate.toDateString()}
+                </Text>
+              </View>
+            );
+          }}
+        </WithDatePickerData>
+      );
+    },
+  },
+  {
+    title: 'Date picker with different locales',
+    render: function (): React.Element<any> {
+      return (
+        <WithDatePickerData useLocaleDateFunctions={false}>
+          {(state, onDateChange) => (
+            <View>
+              <Text style={styles.label}>Chinese locale (zh-CN):</Text>
+              <DatePickerIOS
+                testID="date-zh-CN"
+                date={state.date}
+                mode="date"
+                locale="zh-CN"
+                onDateChange={onDateChange}
+              />
+
+              <Text style={styles.label}>Japanese locale (ja-JP):</Text>
+              <DatePickerIOS
+                testID="date-ja-JP"
+                date={state.date}
+                mode="date"
+                locale="ja-JP"
+                onDateChange={onDateChange}
+              />
+
+              <Text style={styles.label}>English locale (en-US):</Text>
+              <DatePickerIOS
+                testID="date-en-US"
+                date={state.date}
+                mode="date"
+                locale="en-US"
+                onDateChange={onDateChange}
+              />
+
+              <Text style={styles.label}>Selected date:</Text>
+              <Text style={styles.label}>{state.date.toDateString()}</Text>
+            </View>
+          )}
+        </WithDatePickerData>
+      );
+    },
+  },
+  {
+    title: 'Date picker with timezone offset',
+    render: function (): React.Element<any> {
+      return (
+        <WithDatePickerData useLocaleDateFunctions={false}>
+          {(state, onDateChange) => (
+            <View>
+              <Text style={styles.label}>UTC Time (No Offset):</Text>
+              <DatePickerIOS
+                testID="date-utc"
+                date={state.date}
+                mode="datetime"
+                timezoneOffsetInMinutes={0}
+                onDateChange={onDateChange}
+              />
+
+              <Text style={styles.label}>UTC+8 (Beijing/Singapore):</Text>
+              <DatePickerIOS
+                testID="date-utc-plus-8"
+                date={state.date}
+                mode="datetime"
+                timezoneOffsetInMinutes={-480} // UTC+8 = -480 minutes
+                onDateChange={onDateChange}
+              />
+
+              <Text style={styles.label}>UTC-5 (New York):</Text>
+              <DatePickerIOS
+                testID="date-utc-minus-5"
+                date={state.date}
+                mode="datetime"
+                timezoneOffsetInMinutes={300} // UTC-5 = +300 minutes
+                onDateChange={onDateChange}
+              />
+
+              <Text style={styles.label}>Selected time in different zones:</Text>
+              <Text style={styles.label}>
+                Local: {state.date.toLocaleString()}
+              </Text>
+              <Text style={styles.label}>
+                UTC: {state.date.toUTCString()}
+              </Text>
+            </View>
+          )}
+        </WithDatePickerData>
+      );
+    },
+  },
+  {
+    title: 'Date picker with initial date',
+    render: function (): React.Element<any> {
+      // 设置初始日期为 2024 年 1 月 1 日
+      const initialDate = new Date(2024, 0, 1);
+      
+      return (
+        <WithDatePickerData useLocaleDateFunctions={false}>
+          {(state, onDateChange) => (
+            <View>
+              <Text style={styles.label}>With initial date (2024-01-01):</Text>
+              <DatePickerIOS
+                testID="date-with-initial"
+                date={state.date}
+                initialDate={initialDate}
+                mode="date"
+                onDateChange={onDateChange}
+              />
+              
+              <Text style={styles.label}>Current selected date:</Text>
+              <Text style={styles.label}>{state.date.toDateString()}</Text>
+              
+              <Text style={styles.label}>Initial date:</Text>
+              <Text style={styles.label}>{initialDate.toDateString()}</Text>
+            </View>
+          )}
+        </WithDatePickerData>
+      );
+    },
+  },
 ];

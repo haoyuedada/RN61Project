@@ -73,6 +73,7 @@ class EventCheckBoxExample extends React.Component<EventProps, EventState> {
       <View style={styles.container}>
         <View>
           <CheckBox
+            testID="eventCheckBox1"
             onValueChange={value => this.setState({eventCheckBoxIsOn: value})}
             style={styles.checkbox}
             value={this.state.eventCheckBoxIsOn}
@@ -106,6 +107,32 @@ class EventCheckBoxExample extends React.Component<EventProps, EventState> {
   }
 }
 
+class CheckBoxOnchange extends React.Component<EventProps, EventState> {
+  state = {
+    eventCheckBoxIsOn1: false,
+    // eventCheckBoxRegressionIsOn: true,
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View>
+          <CheckBox
+            testID="eventCheckBox1"
+            onChange={(event) => {
+              // 在 RN 0.61 中，onChange 事件处理方式
+              this.setState({eventCheckBoxIsOn1: !this.state.eventCheckBoxIsOn1});
+              console.log('Checkbox changed:', !this.state.eventCheckBoxIsOn1);
+            }}
+            style={styles.checkbox}
+            value={this.state.eventCheckBoxIsOn1}
+          />
+          <Text>{this.state.eventCheckBoxIsOn1 ? 'On' : 'Off'}</Text>
+        </View>
+      </View>
+    );
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -145,4 +172,16 @@ exports.examples = [
       return <CheckBox />;
     },
   },
+  {
+    title: 'CheckBoxes onchange',
+    render(): React.Element<any> {
+      return <CheckBoxOnchange />;
+    },
+  },
+  // {
+  //   title: 'CheckBoxes onValueChange',
+  //   render(): React.Element<any> {
+  //     return <CheckBoxOnValueChange/>;
+  //   },
+  // },
 ];
