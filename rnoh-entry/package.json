@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "postinstall": "node ./scripts/create-build-profile",
-    "dev": "react-native start --port 8085 --client-logs",
+    "metro": "hdc rport tcp:8085 tcp:8085 && react-native start --host 127.0.0.1 --port 8085 --client-logs",
     "bundle:hermes": "react-native bundle-harmony --dev=false --minify=true --js-engine=hermes --hermesc-dir ../../../node_modules/react-native/sdks/hermesc"
   },
   "dependencies": {
-    "@react-native-oh/react-native-harmony": "./libs/react-native-oh-react-native-harmony-0.77.25.tgz",
+    "@react-native-oh/react-native-harmony": "./libs/react-native-oh-react-native-harmony-0.77.31.tgz",
     "@react-native-oh/react-native-harmony-61-interop": "./libs/react-native-oh-react-native-harmony-61-interop-0.0.0.tgz",
     "@react-native-oh/react-native-harmony-cli": "./libs/react-native-oh-react-native-harmony-cli-0.77.25.tgz",
     "react": "18.3.1",

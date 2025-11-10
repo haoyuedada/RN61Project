@@ -156,4 +156,22 @@ exports.examples = [
       );
     },
   },
+  {
+    title: 'Disabled slider',
+    render(): React.Element<any> {
+      return (
+        <View>
+          <SliderExample
+            value={0.3}
+            disabled={true}
+            minimumTrackTintColor={'blue'}
+            maximumTrackTintColor={'red'}
+          />
+          <Text style={styles.text}>
+            This slider is disabled and cannot be moved
+          </Text>
+        </View>
+      );
+    },
+  },
 ];

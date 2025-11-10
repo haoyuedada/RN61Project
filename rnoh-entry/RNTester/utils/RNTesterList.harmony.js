@@ -197,10 +197,10 @@ const APIExamples: Array<RNTesterExample> = [
     key: 'AppStateExample',
     module: require('../examples/AppState/AppStateExample'),
   },
-  // {
-  //   key: 'AsyncStorageExample',
-  //   module: require('../examples/AsyncStorage/AsyncStorageExample'),
-  // },
+  {
+    key: 'AsyncStorageExample',
+    module: require('../examples/AsyncStorage/AsyncStorageExample'),
+  },
   {
     key: 'BorderExample',
     module: require('../examples/Border/BorderExample'),

@@ -29,7 +29,10 @@ class BasicCheckBoxExample extends React.Component<BasicProps, BasicState> {
     return (
       <View>
         <CheckBox
-          onValueChange={value => this.setState({falseCheckBoxIsOn: value})}
+          onValueChange={value => {
+            console.log('checkbox value changed to', value);
+            this.setState({falseCheckBoxIsOn: value})
+          }}
           style={styles.checkbox}
           value={this.state.falseCheckBoxIsOn}
           tintColors={{false: 'red'}}

@@ -11,17 +11,19 @@
 'use strict';
 
 const React = require('react');
-const {AsyncStorage, PickerIOS, Text, View} = require('react-native');
+const {AsyncStorage, PickerIOS, Text, View, StyleSheet} = require('react-native');
 const PickerItemIOS = PickerIOS.Item;
 
 const STORAGE_KEY = '@AsyncStorageExample:key';
 const COLORS = ['red', 'orange', 'yellow', 'green', 'blue'];
 
-class BasicStorageExample extends React.Component<{}, $FlowFixMeState> {
+class MergeItemExample extends React.Component<{}, $FlowFixMeState> {
   state = {
-    selectedValue: COLORS[0],
+    mergedItem: {},
     messages: [],
   };
+
+  STORAGE_MERGE_KEY = '@AsyncStorageExample:mergeKey';
 
   componentDidMount() {
     this._loadInitialState().done();
@@ -29,75 +31,95 @@ class BasicStorageExample extends React.Component<{}, $FlowFixMeState> {
 
   _loadInitialState = async () => {
     try {
-      const value = await AsyncStorage.getItem(STORAGE_KEY);
+      const value = await AsyncStorage.getItem(this.STORAGE_MERGE_KEY);
       if (value !== null) {
-        this.setState({selectedValue: value});
-        this._appendMessage('Recovered selection from disk: ' + value);
-      } else {
-        this._appendMessage('Initialized with no selection on disk.');
+        this.setState({mergedItem: JSON.parse(value)});
+        this._appendMessage('Current value: ' + value);
       }
     } catch (error) {
-      this._appendMessage('AsyncStorage error: ' + error.message);
+      this._appendMessage('Load Error: ' + error.message);
     }
   };
 
-  render() {
-    const color = this.state.selectedValue;
-    return (
-      <View>
-        <PickerIOS selectedValue={color} onValueChange={this._onValueChange}>
-          {COLORS.map(value => (
-            <PickerItemIOS key={value} value={value} label={value} />
-          ))}
-        </PickerIOS>
-        <Text>
-          {'Selected: '}
-          <Text style={{color}}>{this.state.selectedValue}</Text>
-        </Text>
-        <Text />
-        <Text onPress={this._removeStorage}>
-          Press here to remove from storage.
-        </Text>
-        <Text />
-        <Text>Messages:</Text>
-        {this.state.messages.map(m => (
-          <Text key={m}>{m}</Text>
-        ))}
-      </View>
-    );
-  }
+  _mergeItem = async () => {
+    const currentTime = new Date().toLocaleString();
+    const newData = {
+      lastUpdate: currentTime,
+      counter: (this.state.mergedItem.counter || 0) + 1,
+    };
 
-  _onValueChange = async selectedValue => {
-    this.setState({selectedValue});
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, selectedValue);
-      this._appendMessage('Saved selection to disk: ' + selectedValue);
+      console.log('Merging data: ', newData);
+      await AsyncStorage.mergeItem(
+        this.STORAGE_MERGE_KEY,
+        JSON.stringify(newData),
+      );
+      
+      // 读取合并后的数据
+      const value = await AsyncStorage.getItem(this.STORAGE_MERGE_KEY);
+      this.setState({mergedItem: JSON.parse(value)});
+      this._appendMessage('Merged: ' + value);
     } catch (error) {
-      this._appendMessage('AsyncStorage error: ' + error.message);
+      this._appendMessage('Merge Error: ' + error.message);
     }
   };
 
-  _removeStorage = async () => {
+  _clearStorage = async () => {
     try {
-      await AsyncStorage.removeItem(STORAGE_KEY);
-      this._appendMessage('Selection removed from disk.');
+      await AsyncStorage.removeItem(this.STORAGE_MERGE_KEY);
+      this.setState({mergedItem: {}});
+      this._appendMessage('Storage cleared.');
     } catch (error) {
-      this._appendMessage('AsyncStorage error: ' + error.message);
+      this._appendMessage('Clear Error: ' + error.message);
     }
   };
 
   _appendMessage = message => {
     this.setState({messages: this.state.messages.concat(message)});
   };
+
+  render() {
+    return (
+      <View>
+        <Text style={styles.text}>
+          Current merged data:
+          {'\n'}
+          {JSON.stringify(this.state.mergedItem, null, 2)}
+        </Text>
+        <Text style={styles.button} onPress={this._mergeItem}>
+          Tap to merge new data
+        </Text>
+        <Text style={styles.button} onPress={this._clearStorage}>
+          Tap to clear storage
+        </Text>
+        <Text style={styles.text}>Messages:</Text>
+        {this.state.messages.map((m, i) => (
+          <Text key={i}>{m}</Text>
+        ))}
+      </View>
+    );
+  }
 }
 
-exports.title = 'AsyncStorage';
-exports.description = 'Asynchronous local disk storage.';
+// Add to existing styles
+const styles = StyleSheet.create({
+  // ...existing code...
+  text: {
+    margin: 10,
+  },
+  button: {
+    margin: 10,
+    color: 'blue',
+  },
+});
+
+// Add to examples array
 exports.examples = [
+  // ...existing code...
   {
-    title: 'Basics - getItem, setItem, removeItem',
+    title: 'mergeItem - Merge existing value',
     render(): React.Element<any> {
-      return <BasicStorageExample />;
+      return <MergeItemExample />;
     },
   },
 ];

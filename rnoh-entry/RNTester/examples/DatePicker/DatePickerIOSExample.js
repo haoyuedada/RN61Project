@@ -124,6 +124,9 @@ exports.examples = [
               date={state.date}
               mode="datetime"
               onDateChange={onDateChange}
+              onChange={() => {
+                console.log('DatePickerIOS onChange event fired');
+              }}
             />
           )}
         </WithDatePickerData>

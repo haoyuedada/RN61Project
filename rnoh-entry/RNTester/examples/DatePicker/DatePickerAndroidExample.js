@@ -62,9 +62,11 @@ class DatePickerAndroidExample extends React.Component<Props, State> {
     try {
       const newState = {};
       const {action, year, month, day} = await DatePickerAndroid.open(options);
+      console.log('Selected date action: ', action);
       if (action === DatePickerAndroid.dismissedAction) {
         newState[stateKey + 'Text'] = 'dismissed';
       } else {
+        
         const date = new Date(year, month, day);
         newState[stateKey + 'Text'] = date.toLocaleDateString();
         newState[stateKey + 'Date'] = date;
@@ -80,6 +82,7 @@ class DatePickerAndroidExample extends React.Component<Props, State> {
     try {
       const newState = {};
       const {action, year, month, day} = await DatePickerAndroid.open(options);
+      console.log('Selected date action: ', action);
       if (action === DatePickerAndroid.dismissedAction) {
         newState[stateKey + 'Text'] = 'dismissed';
       } else {
