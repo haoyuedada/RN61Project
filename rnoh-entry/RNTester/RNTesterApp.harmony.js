@@ -34,6 +34,21 @@ import type {RNTesterExample} from './types/RNTesterTypes';
 import type {RNTesterAction} from './utils/RNTesterActions';
 import type {RNTesterNavigationState} from './utils/RNTesterNavigationReducer';
 
+
+/**
+ * Used in RCTRootViewIOSExample
+ */
+AppRegistry.registerComponent('SetPropertiesExampleApp', () =>
+  require('./examples/SetPropertiesExample/SetPropertiesExampleApp'),
+);
+
+/**
+ * Used in RCTRootViewIOSExample
+ */
+AppRegistry.registerComponent('RootViewSizeFlexibilityExampleApp', () =>
+  require('./examples/RootViewSizeFlexibilityExample/RootViewSizeFlexibilityExampleApp'),
+);
+
 type Props = {
   exampleFromAppetizeParams?: ?string,
 };
@@ -169,7 +184,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   exampleContainer: {
-    flex: 1
+    flex: 1,
   },
 });
 

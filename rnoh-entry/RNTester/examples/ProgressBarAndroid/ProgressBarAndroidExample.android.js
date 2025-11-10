@@ -59,7 +59,7 @@ class MovingBar extends React.Component<MovingBarProps, MovingBarState> {
 class ProgressBarAndroidExample extends React.Component<{}> {
   render() {
     return (
-      <RNTesterPage title="ProgressBar Examples3">
+      <RNTesterPage title="ProgressBar Examples">
         <RNTesterBlock title="Horizontal Indeterminate ProgressBar">
           {/* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was
            * found when making Flow check .android.js files. */}
@@ -83,6 +83,20 @@ class ProgressBarAndroidExample extends React.Component<{}> {
             color="blue"
           />
         </RNTesterBlock>
+        {[
+          'Normal',
+          'Small',
+          'Large',
+          'Inverse',
+          'SmallInverse',
+          'LargeInverse',
+        ].map((styleAttr) => (
+          <RNTesterBlock
+            title={`[RNOH] styleAttr=${styleAttr}`}
+            key={styleAttr}>
+            <ProgressBar styleAttr={styleAttr} color="purple" />
+          </RNTesterBlock>
+        ))}
       </RNTesterPage>
     );
   }

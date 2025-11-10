@@ -133,6 +133,10 @@ const APIExamples: Array<RNTesterExample> = [
     module: require('../examples/AppState/AppStateExample'),
   },
   {
+    key: 'AsyncStorageExample',
+    module: require('../examples/AsyncStorage/AsyncStorageExample'),
+  },
+  {
     key: 'BorderExample',
     module: require('../examples/Border/BorderExample'),
   },
@@ -243,6 +247,10 @@ const APIExamples: Array<RNTesterExample> = [
   {
     key: '[RNOH] TouchableOpacity interop test',
     module: require('../examples/Interop/TouchableOpacityInteropTest'),
+  },
+  {
+    key: '[RNOH] Date parsing behavior',
+    module: require('../examples/Interop/DateParsingInteropTest'),
   },
 ];
 

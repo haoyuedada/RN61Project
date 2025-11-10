@@ -12,7 +12,7 @@
 
 const React = require('react');
 
-const {StyleSheet, Text, TouchableHighlight, View} = require('react-native');
+const {StyleSheet, Text, TouchableHighlight, View, Platform} = require('react-native');
 
 class RootViewSizeFlexibilityExampleApp extends React.Component<
   {toggled: boolean},
@@ -34,7 +34,9 @@ class RootViewSizeFlexibilityExampleApp extends React.Component<
 
     return (
       <TouchableHighlight onPress={this._onPressButton.bind(this)}>
-        <View style={viewStyle}>
+        <View style={[viewStyle, Platform.OS === "harmony" ? { 
+          flex: undefined,  
+          width: "100%"}: {}]}>
           <View style={styles.center}>
             <Text style={styles.whiteText}>React Native Button</Text>
           </View>
