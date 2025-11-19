@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "node ./scripts/create-build-profile",
     "metro": "hdc rport tcp:8085 tcp:8085 && react-native start --host 127.0.0.1 --port 8085 --client-logs",
-    "bundle:hermes": "react-native bundle-harmony --dev=false --minify=true --js-engine=hermes --hermesc-dir ../../../node_modules/react-native/sdks/hermesc"
+    "bundle:hermes": "react-native bundle-harmony --dev=false --minify=true --js-engine=hermes --hermesc-dir ./node_modules/react-native/sdks/hermesc"
   },
   "dependencies": {
     "@react-native-oh/react-native-harmony": "./libs/react-native-oh-react-native-harmony-0.77.31.tgz",

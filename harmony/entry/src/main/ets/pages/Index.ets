@@ -37,15 +37,10 @@ struct Index {
             enableDebugger: this.rnohCoreContext?.isDebugModeEnabled,
           },
           appKey: "tester61",
-          jsBundleProvider: this.rnohCoreContext?.isDebugModeEnabled ?
-            new AnyJSBundleProvider([
-              MetroJSBundleProvider.fromServerIp("localhost", 8085),
-              new ResourceJSBundleProvider(this.rnohCoreContext.uiAbilityContext.resourceManager, 'hermes_bundle.hbc'),
-            ]) :
-            /**
-             * NOTE: The HBC format is recommended for Hermes in a production environment. HBC provides better performance and loading times.
-             */
-            new ResourceJSBundleProvider(this.rnohCoreContext.uiAbilityContext.resourceManager, 'hermes_bundle.hbc'),
+          jsBundleProvider: new AnyJSBundleProvider([
+            MetroJSBundleProvider.fromServerIp("localhost", 8085),
+            // new ResourceJSBundleProvider(this.rnohCoreContext.uiAbilityContext.resourceManager, 'hermes_bundle.hbc'),
+          ])
         })
       }
     }
