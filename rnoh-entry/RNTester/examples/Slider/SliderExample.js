@@ -29,6 +29,7 @@ class SliderExample extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
           {this.state.value && +this.state.value.toFixed(3)}
         </Text>
         <Slider
+          testID="Slider11111"
           {...this.props}
           onValueChange={value => this.setState({value: value})}
         />

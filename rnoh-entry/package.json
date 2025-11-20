@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@react-native-oh/react-native-harmony": "./libs/react-native-oh-react-native-harmony-0.77.31.tgz",
-    "@react-native-oh/react-native-harmony-61-interop": "./libs/react-native-oh-react-native-harmony-61-interop-0.0.0.tgz",
     "@react-native-oh/react-native-harmony-cli": "./libs/react-native-oh-react-native-harmony-cli-0.77.25.tgz",
+    "@react-native-oh/react-native-harmony-61-interop": "./libs/react-native-oh-react-native-harmony-61-interop-0.0.0.tgz",
     "react": "18.3.1",
     "react-native": "0.77.1",
     "fbjs": "3.0.5"

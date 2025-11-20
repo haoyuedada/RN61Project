@@ -39,7 +39,7 @@ struct Index {
           appKey: "tester61",
           jsBundleProvider: new AnyJSBundleProvider([
             MetroJSBundleProvider.fromServerIp("localhost", 8085),
-            // new ResourceJSBundleProvider(this.rnohCoreContext.uiAbilityContext.resourceManager, 'hermes_bundle.hbc'),
+            new ResourceJSBundleProvider(this.rnohCoreContext.uiAbilityContext.resourceManager, 'hermes_bundle.hbc'),
           ])
         })
       }
